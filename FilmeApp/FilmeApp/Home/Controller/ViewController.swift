@@ -13,6 +13,8 @@ import AlamofireImage
 class ViewController: UIViewController {
 
     
+    var listaDeFilmes: [Filme] = []
+    
     //teste requisição API
     
     
@@ -25,21 +27,33 @@ class ViewController: UIViewController {
             switch response.result {
                 case .success:
                     
-                    var caminhoDoFilme:[Any] = []
-                    var movieId:[Any] = []
-                    
+//                    var caminhoDoFilme:[Any] = []
+//                    var movieId:[Any] = []
+//
                     if let resposta = response.result.value as? Dictionary<String,Any> {
-                        guard let listaDeFilmes = resposta["results"] as? Array<Dictionary<String, Any>> else {return}
+                        guard let filmes = resposta["results"] as? Array<Dictionary<String, Any>> else {return}
                         
-                        for filme in listaDeFilmes {
-                            guard let id = filme["id"] else {return}
-                            guard let caminho = filme["poster_path"] else {return}
-                            caminhoDoFilme.append(caminho)
-                            movieId.append(id)
+                        for filme in filmes {
                             
-                            print(movieId)
-                            print(caminhoDoFilme)
+                           
+                            
+                            self.salvaFilme(filme)
+                            
+                            
+//                            guard let id = filme["id"] else {return}
+//                            guard let caminho = filme["poster_path"] else {return}
+//                            caminhoDoFilme.append(caminho)
+//                            movieId.append(id)
                         }
+                        
+                        print(self.listaDeFilmes[0].titulo)
+                        print(self.listaDeFilmes[0].caminhoPoster)
+                        print(self.listaDeFilmes[11].titulo)
+                        print(self.listaDeFilmes[11].caminhoPoster)
+                        
+//
+//                        print(movieId)
+//                        print(caminhoDoFilme)
                     }
                     
                 break
@@ -50,6 +64,28 @@ class ViewController: UIViewController {
         }
         
     }
+    
+    
+    func salvaFilme(_ dicionarioFilme: Dictionary<String,Any>) {
+        
+        
+        guard let id = dicionarioFilme["id"] as? Int else {return}
+        guard let titulo = dicionarioFilme["title"] as? String else {return}
+        guard let rating = dicionarioFilme["vote_average"] as? Double else {return}
+        guard let sinopse = dicionarioFilme["overview"] as? String else {return}
+        guard let posterPath = dicionarioFilme["poster_path"] as? String else {return}
+        let caminhoPoster = "https://image.tmdb.org/t/p/w500\(posterPath)"
+        
+        let filme = Filme(id, titulo, rating, sinopse, caminhoPoster)
+        listaDeFilmes.append(filme)
+        
+       
+        
+    }
+    
+    
+    
+    
                         
                         
                         
