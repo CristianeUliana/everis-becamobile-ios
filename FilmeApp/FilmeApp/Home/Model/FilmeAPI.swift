@@ -15,7 +15,7 @@ class FilmeAPI: NSObject {
     
     
     func recuperaFilmesAPI(completion:@escaping(_ listaDeFilmes: Array<Filme>) -> Void) {
-        Alamofire.request("https://api.themoviedb.org/3/trending/all/week?api_key=6f6ac16c48e86c7c1e800a462c1c1c4b&language=pt-BR", method: .get).responseJSON { (response) in
+        Alamofire.request("https://api.themoviedb.org/3/trending/movie/week?api_key=6f6ac16c48e86c7c1e800a462c1c1c4b&language=pt-BR", method: .get).responseJSON { (response) in
             switch response.result {
             case .success:
                 if let resposta = response.result.value as? Dictionary<String,Any> {
@@ -39,21 +39,13 @@ class FilmeAPI: NSObject {
     
     func salvaFilme(_ dicionarioFilme: Dictionary<String,Any>) {
         
+        guard let titulo = dicionarioFilme["title"] as? String else {return}
         guard let id = dicionarioFilme["id"] as? Int else {return}
         guard let rating = dicionarioFilme["vote_average"] as? Double else {return}
         guard let sinopse = dicionarioFilme["overview"] as? String else {return}
         guard let posterPath = dicionarioFilme["poster_path"] as? String else {return}
         let caminhoPoster = "https://image.tmdb.org/t/p/w500\(posterPath)"
-        
-        if  dicionarioFilme["title"] != nil {
-            let titulo = dicionarioFilme["title"] as! String
-            let filme = Filme(id, titulo, rating, sinopse, caminhoPoster)
-            listaDeFilmes.append(filme)
-        
-        } else if dicionarioFilme["name"] != nil {
-            let titulo = dicionarioFilme["name"] as! String
-            let filme = Filme(id, titulo, rating, sinopse, caminhoPoster)
-            listaDeFilmes.append(filme)
-        }
+        let filme = Filme(id, titulo, rating, sinopse, caminhoPoster)
+        listaDeFilmes.append(filme)
     }
 }
