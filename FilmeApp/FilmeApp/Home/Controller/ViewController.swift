@@ -64,16 +64,13 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     
     
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//
-//
-//
-//        let pacote = listaViagens[indexPath.item]
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let controller = storyboard.instantiateViewController(withIdentifier: "detalhes") as! DetalhesViagensViewController
-//        controller.pacoteSelecionado = pacote
-//        self.navigationController?.pushViewController(controller, animated: true)
-//    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detalhesFilme = listaDeFilmes[indexPath.item]
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "detalhes") as! DetalhesFilmesViewController
+        controller.filmeSelecionado = detalhesFilme
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
     
     
     
