@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import AlamofireImage
 
-class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     // MARK: - IBOutlets
     
@@ -20,61 +20,71 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     // MARK: - Variáveis
     
     var listaDeFilmes: [Filme] = []
+    var requisicao = FilmeAPI()
     
     
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        testeRequisicaoApi()
         colecaoFilmes.delegate = self
         colecaoFilmes.dataSource = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        recuperaFilmes()
     }
 
     // MARK: - Requisição API
     
-    func testeRequisicaoApi() {
-        Alamofire.request("https://api.themoviedb.org/3/trending/all/week?api_key=6f6ac16c48e86c7c1e800a462c1c1c4b&language=pt-BR", method: .get).responseJSON { (response) in
-            switch response.result {
-                case .success:
-                    if let resposta = response.result.value as? Dictionary<String,Any> {
-                        guard let filmes = resposta["results"] as? Array<Dictionary<String, Any>> else {return}
-                        
-                        for filme in filmes {
-                            self.salvaFilme(filme)
-                        }
-//                        print(self.listaDeFilmes[0].titulo)
-//                        print(self.listaDeFilmes[0].caminhoPoster)
-//                        print(self.listaDeFilmes[11].titulo)
-//                        print(self.listaDeFilmes[11].caminhoPoster)
-                        
-                        self.colecaoFilmes.reloadData()
-                    }
-                break
-            case .failure:
-                print(response.error!)
-                break
-            }
+//    func testeRequisicaoApi() {
+//        Alamofire.request("https://api.themoviedb.org/3/trending/all/week?api_key=6f6ac16c48e86c7c1e800a462c1c1c4b&language=pt-BR", method: .get).responseJSON { (response) in
+//            switch response.result {
+//                case .success:
+//                    if let resposta = response.result.value as? Dictionary<String,Any> {
+//                        guard let filmes = resposta["results"] as? Array<Dictionary<String, Any>> else {return}
+//                        for filme in filmes {
+//                            self.salvaFilme(filme)
+//                        }
+//                        self.colecaoFilmes.reloadData()
+//                    }
+//                break
+//            case .failure:
+//                print(response.error!)
+//                break
+//            }
+//        }
+//    }
+//
+//
+//    // MARK: - Métodos
+//
+//    func salvaFilme(_ dicionarioFilme: Dictionary<String,Any>) {
+//
+//        guard let id = dicionarioFilme["id"] as? Int else {return}
+//        guard let titulo = dicionarioFilme["title"] as? String else {return}
+//        guard let rating = dicionarioFilme["vote_average"] as? Double else {return}
+//        guard let sinopse = dicionarioFilme["overview"] as? String else {return}
+//        guard let posterPath = dicionarioFilme["poster_path"] as? String else {return}
+//        let caminhoPoster = "https://image.tmdb.org/t/p/w500\(posterPath)"
+//
+//        let filme = Filme(id, titulo, rating, sinopse, caminhoPoster)
+//        listaDeFilmes.append(filme)
+//    }
+//
+    
+    
+//    func atualizaTabelaFilmes() {
+//        colecaoFilmes.reloadData()
+//    }
+    
+    
+    func recuperaFilmes() {
+        requisicao.recuperaFilmesAPI() { (listaDeFilmes) in
+            self.listaDeFilmes = listaDeFilmes
+            self.colecaoFilmes.reloadData()
         }
     }
-    
-    
-    // MARK: - Métodos
-    
-    func salvaFilme(_ dicionarioFilme: Dictionary<String,Any>) {
-    
-        guard let id = dicionarioFilme["id"] as? Int else {return}
-        guard let titulo = dicionarioFilme["title"] as? String else {return}
-        guard let rating = dicionarioFilme["vote_average"] as? Double else {return}
-        guard let sinopse = dicionarioFilme["overview"] as? String else {return}
-        guard let posterPath = dicionarioFilme["poster_path"] as? String else {return}
-        let caminhoPoster = "https://image.tmdb.org/t/p/w500\(posterPath)"
-        
-        let filme = Filme(id, titulo, rating, sinopse, caminhoPoster)
-        listaDeFilmes.append(filme)
-    }
-    
-                        
     
     
     // MARK: - CollectionView
@@ -94,7 +104,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return UIDevice.current.userInterfaceIdiom == .phone ? CGSize(width: collectionView.bounds.width/2-20, height: 160) : CGSize(width: collectionView.bounds.width/3-20, height: 250)
+        return UIDevice.current.userInterfaceIdiom == .phone ? CGSize(width: collectionView.bounds.width/2-10, height: 200) : CGSize(width: collectionView.bounds.width/3-20, height: 250)
     }
     
     
