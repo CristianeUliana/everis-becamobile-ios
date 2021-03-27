@@ -34,50 +34,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     override func viewWillAppear(_ animated: Bool) {
         recuperaFilmes()
     }
-
-    // MARK: - Requisição API
-    
-//    func testeRequisicaoApi() {
-//        Alamofire.request("https://api.themoviedb.org/3/trending/all/week?api_key=6f6ac16c48e86c7c1e800a462c1c1c4b&language=pt-BR", method: .get).responseJSON { (response) in
-//            switch response.result {
-//                case .success:
-//                    if let resposta = response.result.value as? Dictionary<String,Any> {
-//                        guard let filmes = resposta["results"] as? Array<Dictionary<String, Any>> else {return}
-//                        for filme in filmes {
-//                            self.salvaFilme(filme)
-//                        }
-//                        self.colecaoFilmes.reloadData()
-//                    }
-//                break
-//            case .failure:
-//                print(response.error!)
-//                break
-//            }
-//        }
-//    }
-//
-//
-//    // MARK: - Métodos
-//
-//    func salvaFilme(_ dicionarioFilme: Dictionary<String,Any>) {
-//
-//        guard let id = dicionarioFilme["id"] as? Int else {return}
-//        guard let titulo = dicionarioFilme["title"] as? String else {return}
-//        guard let rating = dicionarioFilme["vote_average"] as? Double else {return}
-//        guard let sinopse = dicionarioFilme["overview"] as? String else {return}
-//        guard let posterPath = dicionarioFilme["poster_path"] as? String else {return}
-//        let caminhoPoster = "https://image.tmdb.org/t/p/w500\(posterPath)"
-//
-//        let filme = Filme(id, titulo, rating, sinopse, caminhoPoster)
-//        listaDeFilmes.append(filme)
-//    }
-//
-    
-    
-//    func atualizaTabelaFilmes() {
-//        colecaoFilmes.reloadData()
-//    }
-    
     
     func recuperaFilmes() {
         requisicao.recuperaFilmesAPI() { (listaDeFilmes) in
@@ -91,8 +47,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        print(listaDeFilmes.count)
         return self.listaDeFilmes.count
     }
     

@@ -24,10 +24,4 @@ class Filme: NSObject {
         self.sinopse = sinopse
         self.caminhoPoster = caminhoPoster
     }
-    
-    
-    
-    
-    
-
 }

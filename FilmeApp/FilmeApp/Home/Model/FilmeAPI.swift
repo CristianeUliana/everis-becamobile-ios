@@ -40,14 +40,20 @@ class FilmeAPI: NSObject {
     func salvaFilme(_ dicionarioFilme: Dictionary<String,Any>) {
         
         guard let id = dicionarioFilme["id"] as? Int else {return}
-        guard let titulo = dicionarioFilme["title"] as? String else {return}
         guard let rating = dicionarioFilme["vote_average"] as? Double else {return}
         guard let sinopse = dicionarioFilme["overview"] as? String else {return}
         guard let posterPath = dicionarioFilme["poster_path"] as? String else {return}
         let caminhoPoster = "https://image.tmdb.org/t/p/w500\(posterPath)"
         
-        let filme = Filme(id, titulo, rating, sinopse, caminhoPoster)
-        listaDeFilmes.append(filme)
+        if  dicionarioFilme["title"] != nil {
+            let titulo = dicionarioFilme["title"] as! String
+            let filme = Filme(id, titulo, rating, sinopse, caminhoPoster)
+            listaDeFilmes.append(filme)
+        
+        } else if dicionarioFilme["name"] != nil {
+            let titulo = dicionarioFilme["name"] as! String
+            let filme = Filme(id, titulo, rating, sinopse, caminhoPoster)
+            listaDeFilmes.append(filme)
+        }
     }
-    
 }
