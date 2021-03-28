@@ -21,7 +21,7 @@ class DetalhesFilmesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if let filme = filmeSelecionado {
-            guard let urlCelula = URL(string: filme.caminhoPoster) else { return }
+            guard let urlCelula = URL(string: filme.caminhoImagemDetalhes) else { return }
             imagemFilmeImage.af_setImage(withURL: urlCelula)
             self.nomeFilmeLabel.text = filme.titulo
             self.detalhesFilmeLabel.text = filme.sinopse

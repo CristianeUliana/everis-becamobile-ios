@@ -12,16 +12,20 @@ class Filme: NSObject {
     
     let id: Int
     let titulo: String
+    let tituloOriginal: String
     let rating: Double
     let sinopse: String
     let caminhoPoster: String
+    let caminhoImagemDetalhes: String
     
     
-    init(_ id: Int, _ titulo: String, _ rating: Double, _ sinopse: String, _ caminhoPoster: String) {
+    init(_ id: Int, _ titulo: String, _ tituloOriginal: String, _ rating: Double, _ sinopse: String, _ caminhoPoster: String, _ caminhoImagemDetalhes: String) {
         self.id = id
         self.titulo = titulo
+        self.tituloOriginal = tituloOriginal
         self.rating = rating
         self.sinopse = sinopse
         self.caminhoPoster = caminhoPoster
+        self.caminhoImagemDetalhes = caminhoImagemDetalhes
     }
 }
