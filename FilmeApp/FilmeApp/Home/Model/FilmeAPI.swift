@@ -12,7 +12,8 @@ import Alamofire
 class FilmeAPI: NSObject {
 
     var listaDeFilmes: [Filme] = []
-    var filmeDetalhado: Filme? = nil
+    var filmeDetalhado: Filme?
+    
     
     
     func recuperaFilmesAPI(completion:@escaping(_ listaDeFilmes: Array<Filme>) -> Void) {
@@ -36,7 +37,7 @@ class FilmeAPI: NSObject {
     }
     
     
-    func recuperaDetalhesAPI(_ filmeSelecionado: Filme) {
+    func recuperaDetalhesAPI(_ filmeSelecionado: Filme, completion:@escaping(_ filmeDetalhado: Filme) -> Void) {
         
         let id = String(filmeSelecionado.id)
         
@@ -44,31 +45,18 @@ class FilmeAPI: NSObject {
             switch response.result {
             case .success:
                 if let filme = response.result.value as? Dictionary<String,Any> {
-                   //guard let filmes = resposta["results"] as? Array<Dictionary<String, Any>> else {return}
-//                    for filme in resposta {
                     
-                    
-                    filmeSelecionado.titulo = filme["title"] as! String
-                    
-                        print(filmeSelecionado.titulo)
-                        print(filmeSelecionado.id)
-                        print(filmeSelecionado.caminhoPoster)
-                        print(filmeSelecionado.sinopse)
-                    
-                    
-                    
-//                    guard var filmeDetalhado = self.filmeDetalhado else {return}
-//
-//                    filmeDetalhado = self.salvaDetalhes(filme, filmeSelecionado)
-                    
-                    
-//                    }
+                   let filmeDetalhado = self.salvaDetalhes(filme, filmeSelecionado)
+                
+                    completion(filmeDetalhado)
                 }
+                
                 break
             case .failure:
                 print(response.error!)
-//                guard let filmeDetalhado = self.filmeDetalhado else {return}
-//                completion(filmeDetalhado)
+              
+                guard let filmeDetalhado = self.filmeDetalhado else {return}
+                completion(filmeDetalhado)
                 break
             }
        }
@@ -89,13 +77,6 @@ class FilmeAPI: NSObject {
     
     func salvaDetalhes(_ dicionarioFilme: Dictionary<String,Any>, _ filmeSelecionado: Filme) -> Filme {
         
-//        let id = filmeSelecionado.id
-        
-        
-//        let filme:Filme = (listaDeFilmes as NSArray).filtered(using: id) as! id
-//
-        
-      
         filmeSelecionado.titulo = dicionarioFilme["title"] as! String
         filmeSelecionado.tituloOriginal = dicionarioFilme["original_title"] as! String
         filmeSelecionado.rating = dicionarioFilme["vote_average"] as! Double
@@ -106,7 +87,6 @@ class FilmeAPI: NSObject {
         filmeSelecionado.caminhoImagem = "https://image.tmdb.org/t/p/w500\(imagem)"
         
         return filmeSelecionado
-    
     }
     
     

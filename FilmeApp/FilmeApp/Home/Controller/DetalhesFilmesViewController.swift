@@ -37,7 +37,10 @@ class DetalhesFilmesViewController: UIViewController {
         
             print(filme.id)
         
-        requisicao.recuperaDetalhesAPI(filme) 
+        requisicao.recuperaDetalhesAPI(filme) { (filmeDetalhado) in
+            self.configuraPagina(filmeDetalhado)
+            
+            }
         
 //
 //            recuperaDetalhes(filme)
@@ -53,24 +56,23 @@ class DetalhesFilmesViewController: UIViewController {
 //
 //    func recuperaDetalhes(_ filmeSelecionado: Filme) {
 //
-//        requisicao.recuperaDetalhesAPI(filmeSelecionado) { (filmeDetalhado) in
-//
-//        }
+//        requisicao.recuperaDetalhesAPI(filmeSelecionado)
     
         
 //    }
     
     
-//    func configuraPagina(_ filme: Filme) {
-//
-//
-//        guard let urlCelula = URL(string: filme.caminhoImagem) else { return }
-//        imagemFilmeImage.af_setImage(withURL: urlCelula)
-//        self.nomeFilmeLabel.text = filme.titulo
-//        self.detalhesFilmeLabel.text = filme.sinopse
-//        self.tituloOriginalLabel.text = filme.tituloOriginal
-//        self.ratingFilmeLabel.text = "Rating: \(filme.rating)"
-//
-//    }
-//
+    func configuraPagina(_ filmeDetalhado: Filme) {
+
+        
+
+        guard let urlCelula = URL(string: filmeDetalhado.caminhoImagem) else { return }
+        imagemFilmeImage.af_setImage(withURL: urlCelula)
+        self.nomeFilmeLabel.text = filmeDetalhado.titulo
+        self.detalhesFilmeLabel.text = filmeDetalhado.sinopse
+        self.tituloOriginalLabel.text = filmeDetalhado.tituloOriginal
+        self.ratingFilmeLabel.text = "Rating: \(filmeDetalhado.rating)"
+
+    }
+
 }
