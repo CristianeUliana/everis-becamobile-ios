@@ -11,21 +11,21 @@ import UIKit
 class Filme: NSObject {
     
     let id: Int
-    let titulo: String
-    let tituloOriginal: String
-    let rating: Double
-    let sinopse: String
+    var titulo: String
+    var tituloOriginal: String
+    var rating: Double
+    var sinopse: String
     let caminhoPoster: String
-    let caminhoImagemDetalhes: String
+    var caminhoImagem: String
     
     
-    init(_ id: Int, _ titulo: String, _ tituloOriginal: String, _ rating: Double, _ sinopse: String, _ caminhoPoster: String, _ caminhoImagemDetalhes: String) {
+    init(_ id: Int, _ titulo: String = "", _ tituloOriginal: String = "", _ rating: Double = 0.0, _ sinopse: String = "", _ caminhoPoster: String, _ caminhoImagem: String = "") {
         self.id = id
         self.titulo = titulo
         self.tituloOriginal = tituloOriginal
         self.rating = rating
         self.sinopse = sinopse
         self.caminhoPoster = caminhoPoster
-        self.caminhoImagemDetalhes = caminhoImagemDetalhes
+        self.caminhoImagem = caminhoImagem
     }
 }
