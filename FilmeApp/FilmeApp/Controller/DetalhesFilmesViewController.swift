@@ -51,4 +51,7 @@ class DetalhesFilmesViewController: UIViewController {
         self.tituloOriginalLabel.text = filmeDetalhado.tituloOriginal
         self.ratingFilmeLabel.text = "Rating: \(filmeDetalhado.rating)"
     }
+    
+    
+  
 }

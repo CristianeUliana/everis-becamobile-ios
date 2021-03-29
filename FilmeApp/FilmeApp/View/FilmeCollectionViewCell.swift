@@ -12,6 +12,8 @@ import AlamofireImage
 class FilmeCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var celulaFilme: UIImageView!
+    @IBOutlet weak var filmesSemanaLabel: UILabel!
+    
     
     func configuraCelula(filme:Filme) {
         guard let urlCelula = URL(string: filme.caminhoPoster) else { return }
@@ -19,5 +21,6 @@ class FilmeCollectionViewCell: UICollectionViewCell {
         layer.borderWidth = 0.5
         layer.borderColor = UIColor(red: 85.0/255.0, green: 85.0/255.0, blue: 85.0/255.0, alpha: 1).cgColor
         layer.cornerRadius = 8
+        filmesSemanaLabel.layer.cornerRadius = 10
     }
 }

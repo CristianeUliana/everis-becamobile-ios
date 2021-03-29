@@ -61,9 +61,7 @@ class FilmeAPI: NSObject {
     // MARK: - Métodos
     
     func salvaDetalhes(_ dicionarioFilme: Dictionary<String,Any>) -> Detalhes? {
-        
         let filmeDetalhado: Detalhes
-        
         guard let id = dicionarioFilme["id"] as? Int else {return nil}
         guard let titulo = dicionarioFilme["title"] as? String else {return nil}
         guard let tituloOriginal = dicionarioFilme["original_title"] as? String else {return nil}
@@ -71,40 +69,15 @@ class FilmeAPI: NSObject {
         guard let sinopse = dicionarioFilme["overview"] as? String else {return nil}
         guard let imagem = dicionarioFilme["backdrop_path"] as? String else {return nil}
         let caminhoImagem = "https://image.tmdb.org/t/p/w500\(imagem)"
-        
         filmeDetalhado = Detalhes(id, titulo, tituloOriginal, rating, sinopse, caminhoImagem)
-        
         return filmeDetalhado
-        
-//        filmeSelecionado.titulo = dicionarioFilme["title"] as! String
-//        filmeSelecionado.tituloOriginal = dicionarioFilme["original_title"] as! String
-//        filmeSelecionado.rating = dicionarioFilme["vote_average"] as! Double
-//        filmeSelecionado.sinopse = dicionarioFilme["overview"] as! String
-//        guard let imagem = dicionarioFilme["backdrop_path"] as? String else {return filmeSelecionado}
-//        filmeSelecionado.caminhoImagem = "https://image.tmdb.org/t/p/w500\(imagem)"
-//        return filmeSelecionado
     }
     
     func salvaFilme(_ dicionarioFilme: Dictionary<String,Any>) {
         guard let id = dicionarioFilme["id"] as? Int else {return}
         guard let posterPath = dicionarioFilme["poster_path"] as? String else {return}
         let caminhoPoster = "https://image.tmdb.org/t/p/w500\(posterPath)"
-        
-        
         let filme = Filme(id, caminhoPoster)
-        
          listaDeFilmes.append(filme)
-        
-        
-//        let titulo = ""
-//        let tituloOriginal = ""
-//        let rating = 0.0
-//        let sinopse = ""
-//        let caminhoImagem = ""
-        
-//        let filme = Filme(id, titulo, tituloOriginal, rating, sinopse, caminhoPoster, caminhoImagem)
-       
-//        listaDeFilmes.append(filme)
-        
     }
 }

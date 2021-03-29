@@ -18,23 +18,3 @@ class Filme: NSObject {
             self.caminhoPoster = caminhoPoster
             }
     }
-    
-//    let id: Int
-//    var titulo: String
-//    var tituloOriginal: String
-//    var rating: Double
-//    var sinopse: String
-//    let caminhoPoster: String
-//    var caminhoImagem: String
-//
-//
-//    init(_ id: Int, _ titulo: String = "", _ tituloOriginal: String = "", _ rating: Double = 0.0, _ sinopse: String = "", _ caminhoPoster: String, _ caminhoImagem: String = "") {
-//        self.id = id
-//        self.titulo = titulo
-//        self.tituloOriginal = tituloOriginal
-//        self.rating = rating
-//        self.sinopse = sinopse
-//        self.caminhoPoster = caminhoPoster
-//        self.caminhoImagem = caminhoImagem
-//    }
-
