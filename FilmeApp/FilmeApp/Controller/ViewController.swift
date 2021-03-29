@@ -8,7 +8,6 @@
 
 import UIKit
 import Alamofire
-import AlamofireImage
 
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
@@ -61,9 +60,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         return UIDevice.current.userInterfaceIdiom == .phone ? CGSize(width: collectionView.bounds.width/2-10, height: 200) : CGSize(width: collectionView.bounds.width/3-20, height: 250)
     }
     
-    
-    
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detalhesFilme = listaDeFilmes[indexPath.item]
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -71,10 +67,5 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         controller.filmeSelecionado = detalhesFilme
         self.navigationController?.pushViewController(controller, animated: true)
     }
-    
-    
-    
-   
-
 }
 

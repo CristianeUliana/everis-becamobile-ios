@@ -99,16 +99,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3E39B8A4260E2C3F00CDDBA8 /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				3E39B8A5260E2C4600CDDBA8 /* Model */,
-				3E39B8A6260E2C4C00CDDBA8 /* View */,
-				3E39B8A7260E2C5300CDDBA8 /* Controller */,
-			);
-			path = Home;
-			sourceTree = "<group>";
-		};
 		3E39B8A5260E2C4600CDDBA8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -131,37 +121,6 @@
 			children = (
 				3EA0194E260E26BB00D4B55A /* ViewController.swift */,
 				3E39B8BB260FD23400CDDBA8 /* DetalhesFilmesViewController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		3E39B8A8260E2C6F00CDDBA8 /* Detalhes */ = {
-			isa = PBXGroup;
-			children = (
-				3E39B8A9260E2C7B00CDDBA8 /* Model */,
-				3E39B8AA260E2C8100CDDBA8 /* View */,
-				3E39B8AB260E2C8500CDDBA8 /* Controller */,
-			);
-			path = Detalhes;
-			sourceTree = "<group>";
-		};
-		3E39B8A9260E2C7B00CDDBA8 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		3E39B8AA260E2C8100CDDBA8 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		3E39B8AB260E2C8500CDDBA8 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -192,8 +151,9 @@
 			isa = PBXGroup;
 			children = (
 				3EA0194C260E26BB00D4B55A /* AppDelegate.swift */,
-				3E39B8A4260E2C3F00CDDBA8 /* Home */,
-				3E39B8A8260E2C6F00CDDBA8 /* Detalhes */,
+				3E39B8A5260E2C4600CDDBA8 /* Model */,
+				3E39B8A6260E2C4C00CDDBA8 /* View */,
+				3E39B8A7260E2C5300CDDBA8 /* Controller */,
 				3EA01950260E26BB00D4B55A /* Main.storyboard */,
 				3EA01956260E26BC00D4B55A /* Assets.xcassets */,
 				3EA01958260E26BC00D4B55A /* LaunchScreen.storyboard */,
