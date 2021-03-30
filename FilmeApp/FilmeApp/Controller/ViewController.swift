@@ -31,11 +31,12 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         colecaoFilmes.delegate = self
         colecaoFilmes.dataSource = self
         pesquisarFilme.delegate = self
+        recuperaFilmes()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
-        recuperaFilmes()
+        
     }
     
     func recuperaFilmes() {
