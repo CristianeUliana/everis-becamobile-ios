@@ -19,6 +19,6 @@ class Filme: NSObject {
         self.id = id
         self.titulo = titulo
         self.caminhoPoster = caminhoPoster
-        self.detalhes = Detalhes("", "", 0.0, "", "")
+        self.detalhes = Detalhes("", 0.0, "", "")
         }
 }

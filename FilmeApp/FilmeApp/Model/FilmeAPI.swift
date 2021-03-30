@@ -14,7 +14,7 @@ class FilmeAPI: NSObject {
     // MARK: - Variáveis
 
     var listaDeFilmes: [Filme] = []
-    var filmeDetalhado: Detalhes?
+    var filmeDetalhado: Filme?
     
     // MARK: - Requisições
     
@@ -39,13 +39,13 @@ class FilmeAPI: NSObject {
     }
     
     
-    func recuperaDetalhesAPI(_ filmeSelecionado: Filme, completion:@escaping(_ filmeDetalhado: Detalhes) -> Void) {
+    func recuperaDetalhesAPI(_ filmeSelecionado: Filme, completion:@escaping(_ filmeDetalhado: Filme) -> Void) {
         let id = String(filmeSelecionado.id)
         Alamofire.request("https://api.themoviedb.org/3/movie/\(id)?api_key=6f6ac16c48e86c7c1e800a462c1c1c4b&language=pt-BR", method: .get).responseJSON { (response) in
             switch response.result {
             case .success:
                 if let filme = response.result.value as? Dictionary<String,Any> {
-                    guard let filmeDetalhado = self.salvaDetalhes(filme) else {return}
+                    guard let filmeDetalhado = self.salvaDetalhes(filme, filmeSelecionado) else {return}
                     completion(filmeDetalhado)
                 }
                 break
@@ -60,17 +60,31 @@ class FilmeAPI: NSObject {
     
     // MARK: - Métodos
     
-    func salvaDetalhes(_ dicionarioFilme: Dictionary<String,Any>) -> Detalhes? {
-        let filmeDetalhado: Detalhes
-        guard let titulo = dicionarioFilme["title"] as? String else {return nil}
+    func salvaDetalhes(_ dicionarioFilme: Dictionary<String,Any>, _ filmeSelecionado: Filme) -> Filme? {
+        
         guard let tituloOriginal = dicionarioFilme["original_title"] as? String else {return nil}
         guard let rating = dicionarioFilme["vote_average"] as? Double else {return nil}
         guard let sinopse = dicionarioFilme["overview"] as? String else {return nil}
         guard let imagem = dicionarioFilme["backdrop_path"] as? String else {return nil}
         let caminhoImagem = "https://image.tmdb.org/t/p/w500\(imagem)"
-        filmeDetalhado = Detalhes(titulo, tituloOriginal, rating, sinopse, caminhoImagem)
-        return filmeDetalhado
+        
+        
+        
+        filmeSelecionado.detalhes.tituloOriginal = tituloOriginal
+        filmeSelecionado.detalhes.rating = rating
+        filmeSelecionado.detalhes.sinopse = sinopse
+        filmeSelecionado.detalhes.caminhoImagem = caminhoImagem
+        
+        
+        
+        
+//        let detalhes = Detalhes(titulo, tituloOriginal, rating, sinopse, caminhoImagem)
+//
+//        filmeDetalhado = Filme(detalhes)
+        
+        return filmeSelecionado
     }
+    
     
     func salvaFilme(_ dicionarioFilme: Dictionary<String,Any>) {
         guard let filme = retornaFilme(dicionarioFilme) else {return}
@@ -83,6 +97,5 @@ class FilmeAPI: NSObject {
         guard let posterPath = dicionarioFilme["poster_path"] as? String else {return nil}
         let caminhoPoster = "https://image.tmdb.org/t/p/w500\(posterPath)"
         return Filme(id, titulo, caminhoPoster)
-        
     }
 }

@@ -117,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				3E39B8B5260E59E700CDDBA8 /* FilmeCollectionViewCell.swift */,
+				3EA01950260E26BB00D4B55A /* Main.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -159,7 +160,6 @@
 				3E39B8A5260E2C4600CDDBA8 /* Model */,
 				3E39B8A6260E2C4C00CDDBA8 /* View */,
 				3E39B8A7260E2C5300CDDBA8 /* Controller */,
-				3EA01950260E26BB00D4B55A /* Main.storyboard */,
 				3EA01956260E26BC00D4B55A /* Assets.xcassets */,
 				3EA01958260E26BC00D4B55A /* LaunchScreen.storyboard */,
 				3EA0195B260E26BC00D4B55A /* Info.plist */,
@@ -171,9 +171,9 @@
 		3EA01963260E26BC00D4B55A /* FilmeAppTests */ = {
 			isa = PBXGroup;
 			children = (
+				3EC7CD9526135EE700AF02BC /* FilmeAPITests.swift */,
 				3EA01964260E26BC00D4B55A /* FilmeAppTests.swift */,
 				3EA01966260E26BC00D4B55A /* Info.plist */,
-				3EC7CD9526135EE700AF02BC /* FilmeAPITests.swift */,
 			);
 			path = FilmeAppTests;
 			sourceTree = "<group>";

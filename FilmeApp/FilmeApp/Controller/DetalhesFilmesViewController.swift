@@ -24,7 +24,7 @@ class DetalhesFilmesViewController: UIViewController {
     
     var requisicao = FilmeAPI()
     var filmeSelecionado: Filme? = nil
-    var filmeDetalhado: Detalhes? = nil
+    var filmeDetalhado: Filme? = nil
     
     
     //MARK: - LifeCycle
@@ -44,12 +44,12 @@ class DetalhesFilmesViewController: UIViewController {
     }
   
     
-    func configuraPagina(_ filmeDetalhado: Detalhes) {
-        guard let urlCelula = URL(string: filmeDetalhado.caminhoImagem) else { return }
+    func configuraPagina(_ filmeDetalhado: Filme) {
+        guard let urlCelula = URL(string: filmeDetalhado.detalhes.caminhoImagem) else { return }
         imagemFilmeImage.af_setImage(withURL: urlCelula)
         self.nomeFilmeLabel.text = filmeDetalhado.titulo
-        self.detalhesFilmeLabel.text = filmeDetalhado.sinopse
-        self.tituloOriginalLabel.text = filmeDetalhado.tituloOriginal
-        self.ratingFilmeLabel.text = "Rating: \(filmeDetalhado.rating)"
+        self.detalhesFilmeLabel.text = filmeDetalhado.detalhes.sinopse
+        self.tituloOriginalLabel.text = filmeDetalhado.detalhes.tituloOriginal
+        self.ratingFilmeLabel.text = "Rating: \(filmeDetalhado.detalhes.rating)"
     }
 }

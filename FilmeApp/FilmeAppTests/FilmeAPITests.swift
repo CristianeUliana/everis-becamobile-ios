@@ -68,19 +68,4 @@ class FilmeAPITests: XCTestCase {
         XCTAssertEqual(0003, listaDeFilmes[1].id)
         XCTAssertEqual(2, listaDeFilmes.count)
     }
-    
-    
-    
-    
-    
-    
-    
-    //for index in (0...5) {
-    //            let dicionario: [String:String] = ["id" : "000\(index)", "title" : "teste\(index)", "poster_path" : "/000\(index).jpg"]
-    //            dicionarioFilmes.append(dicionario)
-    //        }
-    
-    
-    
-
 }
