@@ -11,10 +11,12 @@ import UIKit
 class Filme: NSObject {
     
     let id: Int
+    @objc let titulo: String
     let caminhoPoster: String
     
-    init(_ id: Int, _ caminhoPoster: String) {
-            self.id = id
-            self.caminhoPoster = caminhoPoster
-            }
-    }
+    init(_ id: Int, _ titulo: String, _ caminhoPoster: String) {
+        self.id = id
+        self.titulo = titulo
+        self.caminhoPoster = caminhoPoster
+        }
+}

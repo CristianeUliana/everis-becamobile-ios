@@ -32,6 +32,7 @@ class DetalhesFilmesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
         self.scrollPrincipal.contentSize = CGSize(width: self.scrollPrincipal.frame.width, height: self.scrollPrincipal.frame.height + 320)
         }
     
@@ -51,7 +52,4 @@ class DetalhesFilmesViewController: UIViewController {
         self.tituloOriginalLabel.text = filmeDetalhado.tituloOriginal
         self.ratingFilmeLabel.text = "Rating: \(filmeDetalhado.rating)"
     }
-    
-    
-  
 }

@@ -75,9 +75,12 @@ class FilmeAPI: NSObject {
     
     func salvaFilme(_ dicionarioFilme: Dictionary<String,Any>) {
         guard let id = dicionarioFilme["id"] as? Int else {return}
+        guard let titulo = dicionarioFilme["title"] as? String else {return}
         guard let posterPath = dicionarioFilme["poster_path"] as? String else {return}
         let caminhoPoster = "https://image.tmdb.org/t/p/w500\(posterPath)"
-        let filme = Filme(id, caminhoPoster)
+        let filme = Filme(id, titulo, caminhoPoster)
          listaDeFilmes.append(filme)
     }
+    
+   
 }

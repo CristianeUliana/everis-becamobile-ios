@@ -9,16 +9,18 @@
 import UIKit
 import Alamofire
 
-class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
 
     // MARK: - IBOutlets
     
     @IBOutlet weak var colecaoFilmes: UICollectionView!
+    @IBOutlet weak var pesquisarFilme: UISearchBar!
     
     
     // MARK: - Variáveis
     
     var listaDeFilmes: [Filme] = []
+    var listaDePesquisa: [Filme] = []
     var requisicao = FilmeAPI()
     
     
@@ -26,8 +28,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         colecaoFilmes.delegate = self
         colecaoFilmes.dataSource = self
+        pesquisarFilme.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -37,6 +41,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     func recuperaFilmes() {
         requisicao.recuperaFilmesAPI() { (listaDeFilmes) in
             self.listaDeFilmes = listaDeFilmes
+            self.listaDePesquisa = self.listaDeFilmes
             self.colecaoFilmes.reloadData()
         }
     }
@@ -46,12 +51,12 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.listaDeFilmes.count
+        return self.listaDePesquisa.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let celulaFilme = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! FilmeCollectionViewCell
-        let filmeAtual = listaDeFilmes[indexPath.item]
+        let filmeAtual = listaDePesquisa[indexPath.item]
         celulaFilme.configuraCelula(filme: filmeAtual)
         return celulaFilme
     }
@@ -61,11 +66,22 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detalhesFilme = listaDeFilmes[indexPath.item]
+        let detalhesFilme = listaDePesquisa[indexPath.item]
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "detalhes") as! DetalhesFilmesViewController
         controller.filmeSelecionado = detalhesFilme
         self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        listaDePesquisa = listaDeFilmes
+        if searchText != "" {
+            let filtro = NSPredicate(format: "titulo contains [cd] %@", searchText)
+            let listaFiltrada:Array<Filme> = (listaDePesquisa as NSArray).filtered(using: filtro) as! Array
+            listaDePesquisa = listaFiltrada
+        }
+      colecaoFilmes.reloadData()
     }
 }
 
