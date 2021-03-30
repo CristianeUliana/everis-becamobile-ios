@@ -28,13 +28,13 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
         colecaoFilmes.delegate = self
         colecaoFilmes.dataSource = self
         pesquisarFilme.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         recuperaFilmes()
     }
     
@@ -73,6 +73,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         self.navigationController?.pushViewController(controller, animated: true)
     }
     
+    
+    //MARK: - SearchBar
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         listaDePesquisa = listaDeFilmes
