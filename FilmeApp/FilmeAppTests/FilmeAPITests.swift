@@ -24,12 +24,6 @@ class FilmeAPITests: XCTestCase {
         super.tearDown()
     }
     
-//    func testPerformanceExample() {
-//            self.measure {
-//        }
-//    }
-    
-    
     func testDeveIgnorarFilmeSemInformacao() {
        
         let dicionario1: [String:Any] = ["id" : "0001", "title" : "teste1", "poster_path" : "/0001.jpg"]

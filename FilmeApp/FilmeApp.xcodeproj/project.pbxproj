@@ -20,6 +20,7 @@
 		3EA0195A260E26BC00D4B55A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3EA01958260E26BC00D4B55A /* LaunchScreen.storyboard */; };
 		3EA01965260E26BC00D4B55A /* FilmeAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA01964260E26BC00D4B55A /* FilmeAppTests.swift */; };
 		3EA01970260E26BC00D4B55A /* FilmeAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA0196F260E26BC00D4B55A /* FilmeAppUITests.swift */; };
+		3EA693892614FB4600CF2683 /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA693882614FB4600CF2683 /* Codable.swift */; };
 		3EC7CD9626135EE700AF02BC /* FilmeAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC7CD9526135EE700AF02BC /* FilmeAPITests.swift */; };
 		4731F2A3BA9602712E5C22E3 /* Pods_FilmeApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1B746B8DB55BCC9F97D3453 /* Pods_FilmeApp.framework */; };
 		9B003DB3A1996D33E503AC3C /* Pods_FilmeApp_FilmeAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A8AB7E4D7F8B4DB58FD0AF /* Pods_FilmeApp_FilmeAppUITests.framework */; };
@@ -64,6 +65,7 @@
 		3EA0196B260E26BC00D4B55A /* FilmeAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FilmeAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EA0196F260E26BC00D4B55A /* FilmeAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmeAppUITests.swift; sourceTree = "<group>"; };
 		3EA01971260E26BC00D4B55A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3EA693882614FB4600CF2683 /* Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codable.swift; sourceTree = "<group>"; };
 		3EC7CD9526135EE700AF02BC /* FilmeAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmeAPITests.swift; sourceTree = "<group>"; };
 		81F31C167102A6956E83B39B /* Pods-FilmeApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FilmeApp.release.xcconfig"; path = "Target Support Files/Pods-FilmeApp/Pods-FilmeApp.release.xcconfig"; sourceTree = "<group>"; };
 		8440A8525025B3217E14824D /* Pods_FilmeAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FilmeAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,6 +111,7 @@
 				3E39B8B9260F9C5900CDDBA8 /* FilmeAPI.swift */,
 				3E39B8B7260E5E4A00CDDBA8 /* Filme.swift */,
 				3E90A5CE261290F80058DAFD /* Detalhes.swift */,
+				3EA693882614FB4600CF2683 /* Codable.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -454,6 +457,7 @@
 				3E39B8BD260FD23400CDDBA8 /* DetalhesFilmesViewController.swift in Sources */,
 				3E90A5CF261290F80058DAFD /* Detalhes.swift in Sources */,
 				3E39B8B8260E5E4A00CDDBA8 /* Filme.swift in Sources */,
+				3EA693892614FB4600CF2683 /* Codable.swift in Sources */,
 				3EA01955260E26BB00D4B55A /* FilmeApp.xcdatamodeld in Sources */,
 				3EA0194D260E26BB00D4B55A /* AppDelegate.swift in Sources */,
 				3E39B8B6260E59E700CDDBA8 /* FilmeCollectionViewCell.swift in Sources */,
