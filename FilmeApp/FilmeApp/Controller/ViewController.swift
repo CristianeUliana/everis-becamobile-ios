@@ -41,7 +41,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         requisicao.recuperaFilmesAPI() { (listaDeFilmes) in
             self.listaDeFilmes = listaDeFilmes
             self.listaDePesquisa = self.listaDeFilmes
-            self.colecaoFilmes.reloadData()
+            DispatchQueue.main.async {
+                self.colecaoFilmes.reloadData()
+                print("\(listaDeFilmes[1].titulo) - \(listaDeFilmes[1].id)")
+            }
         }
     }
     

@@ -39,17 +39,23 @@ class DetalhesFilmesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         guard let filme = filmeSelecionado else {return}
         requisicao.recuperaDetalhesAPI(filme) { (filmeDetalhado) in
-            self.configuraPagina(filmeDetalhado)
+            DispatchQueue.main.async {
+                self.configuraPagina(filmeDetalhado)
+                print(filmeDetalhado.id)
+            }
         }
     }
   
     
     func configuraPagina(_ filmeDetalhado: Filme) {
-        guard let urlCelula = URL(string: filmeDetalhado.detalhes.caminhoImagem) else { return }
-        imagemFilmeImage.af_setImage(withURL: urlCelula)
+
+        
+        guard let urlBackdrop = URL(string: filmeDetalhado.detalhes.caminhoImagem) else { return }
+        imagemFilmeImage.af_setImage(withURL: urlBackdrop)
         self.nomeFilmeLabel.text = filmeDetalhado.titulo
         self.detalhesFilmeLabel.text = filmeDetalhado.detalhes.sinopse
         self.tituloOriginalLabel.text = filmeDetalhado.detalhes.tituloOriginal
         self.ratingFilmeLabel.text = "Rating: \(filmeDetalhado.detalhes.rating)"
+        
     }
 }
