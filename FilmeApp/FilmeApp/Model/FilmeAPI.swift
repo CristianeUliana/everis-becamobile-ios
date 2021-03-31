@@ -61,27 +61,15 @@ class FilmeAPI: NSObject {
     // MARK: - Métodos
     
     func salvaDetalhes(_ dicionarioFilme: Dictionary<String,Any>, _ filmeSelecionado: Filme) -> Filme? {
-        
         guard let tituloOriginal = dicionarioFilme["original_title"] as? String else {return nil}
         guard let rating = dicionarioFilme["vote_average"] as? Double else {return nil}
         guard let sinopse = dicionarioFilme["overview"] as? String else {return nil}
         guard let imagem = dicionarioFilme["backdrop_path"] as? String else {return nil}
         let caminhoImagem = "https://image.tmdb.org/t/p/w500\(imagem)"
-        
-        
-        
         filmeSelecionado.detalhes.tituloOriginal = tituloOriginal
         filmeSelecionado.detalhes.rating = rating
         filmeSelecionado.detalhes.sinopse = sinopse
         filmeSelecionado.detalhes.caminhoImagem = caminhoImagem
-        
-        
-        
-        
-//        let detalhes = Detalhes(titulo, tituloOriginal, rating, sinopse, caminhoImagem)
-//
-//        filmeDetalhado = Filme(detalhes)
-        
         return filmeSelecionado
     }
     

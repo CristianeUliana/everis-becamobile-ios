@@ -46,3 +46,51 @@ Criar um aplicativo que realize a listagem de filmes e exibição dos detalhes:
     - ssh-add -K ~/.ssh/id_rsa
 
 * :clap: Parabéns por ter chegado até aqui! :smile: _Um grande abraço e bem vindo ao time Mobile iOS_ :iphone: :punch:
+
+
+
+#######################################################################################
+
+RESULTADO DA AVALIAÇÃO:
+
+O aplicativo foi desenvolvido utilizando a versão 10.1 do xCode, com base no simulador do iPhone SE.
+
+As requisições foram feitas utilizando Alamofire, com codificação nativa. As informações necessárias para a primeira tela são populadas em atributos da classe Filme.
+
+Para chamar as imagens da capa dos filmes da semana foi utilizado o AlamofireImage. As imagens estão dispostas na tela utilizando uma CollectionView
+
+Foi implementada na primeira tela uma SearchBar para pesquisa com base nos títulos dos filmes em português.
+
+Ao clicar em um filme, o usuário é direcionado para a segunda tela, na qual ocorre a requisição dos Detalhes do filme. Para essa requisição foi utilizado o id do filme clicado. As informações necessárias são populadas em atributos da classe Detalhes, que, por sua vez, é um atributo da classe Filme. Dessa forma, todas as informações referentes ao filme pertencem ao mesmo objeto, criado na primeira requisição.
+
+Na tela de detalhes foi implementada uma ScrollView, visto que a sinopse de alguns filmes pode ser grande demais para a tela do iPhone SE.
+
+Para que o aplicativo possua responsividade nos demais iPhones, foram implementadas constraints e stackViews, dessa forma o conteúdo está se ajustando a outros modelos. 
+
+Por fim, foram implementados dois testes unitários para verificar se a requisição está ignorando filmes que estejam sem informações no servidor, salvando os próximos sem problemas.
+
+
+MAIORES DESAFIOS:
+
+1- O primeiro desafio que encontrei foi a utilização do codable no código. Após utilizar o QuickType para gerar o codable, o xCode não reconhecia como uma estrutura que pudesse ser codificada. Dessa forma, optei por não utilizar codable nesse primeiro momento. 
+Apenas após finalizar o aplicativo, descobri que precisava desmarcar uma opção no QuickType para que o codable fosse gerado de forma correta. Assim, pretendo refatorar o código utilizando codable em outra branch.
+
+2 - Fazer a primeira requisição foi desafiador. Compreender o json que chegava com as informações e como era estruturado foi imprescindível para o andamento desta etapa.
+
+3 - Carregar a imagem na primeira tela foi outro desafio, pois a CollectionView carregava antes de a requisição finalizar. Para esta etapa foi preciso entender melhor o conceito de completion e lembrar de fazer a atualização da tabela após a requisição finalizar.
+
+4 - Trabalhar com layout também se mostrou bastante desafiador. As constraints, a stack e o scroll foram bem trabalhosos de implementar.
+
+5 - Por fim, encontrei um pouco de dificuldade na hora de formular os cenários de teste para essa aplicação.
+
+
+PRÓXIMOS PASSOS:
+
+1 - Implementar a codificação por codable.
+
+2 - Verificar a demora do carregamento das informações da página de detalhes. Pretendo encontrar uma maneira de fazer com que as labels sejam apresentadas apenas com as informações da requisição. Da forma como está agora, quando a requisição demora a retornar as informações, a tela é mostrada com as labels genéricas.
+
+3 - Verificar o layout das imagens e informações nos demais modelos de iPhone, pois parecem estar sofrendo um pouco de distorção nos tamanhos maiores.
+
+4 - Implementar a paginação.
+
