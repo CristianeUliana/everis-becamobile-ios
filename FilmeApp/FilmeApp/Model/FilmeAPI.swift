@@ -19,8 +19,11 @@ class FilmeAPI: NSObject {
     
     // MARK: - Requisições
     
-    func recuperaFilmesAPI(completion:@escaping(_ listaDeFilmes: Array<Filme>) -> Void) {
-        let url = URL( string: "https://api.themoviedb.org/3/trending/movie/week?api_key=6f6ac16c48e86c7c1e800a462c1c1c4b&language=pt-BR")!
+    func recuperaFilmesAPI(_ index: Int, completion:@escaping(_ listaDeFilmes: Array<Filme>) -> Void) {
+        
+        let page = "&page=\(index)"
+        
+        let url = URL( string: "https://api.themoviedb.org/3/trending/movie/week?api_key=6f6ac16c48e86c7c1e800a462c1c1c4b&language=pt-BR\(page)")!
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let responseData = data else { return }
             do {

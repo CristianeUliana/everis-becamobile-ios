@@ -108,9 +108,9 @@
 		3E39B8A5260E2C4600CDDBA8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				3E39B8B9260F9C5900CDDBA8 /* FilmeAPI.swift */,
 				3E39B8B7260E5E4A00CDDBA8 /* Filme.swift */,
 				3E90A5CE261290F80058DAFD /* Detalhes.swift */,
+				3E39B8B9260F9C5900CDDBA8 /* FilmeAPI.swift */,
 				3EA693882614FB4600CF2683 /* Codable.swift */,
 			);
 			path = Model;

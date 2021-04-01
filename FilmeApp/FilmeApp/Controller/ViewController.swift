@@ -38,14 +38,15 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
     
     func recuperaFilmes() {
-        requisicao.recuperaFilmesAPI() { (listaDeFilmes) in
-            self.listaDeFilmes = listaDeFilmes
-            self.listaDePesquisa = self.listaDeFilmes
-            DispatchQueue.main.async {
-                self.colecaoFilmes.reloadData()
-                print("\(listaDeFilmes[1].titulo) - \(listaDeFilmes[1].id)")
+        for index in 1...3 {
+            requisicao.recuperaFilmesAPI(index) { (listaDeFilmes) in
+                self.listaDeFilmes = listaDeFilmes
+                self.listaDePesquisa = self.listaDeFilmes
+                DispatchQueue.main.async {
+                    self.colecaoFilmes.reloadData()
+                }
             }
-        }
+        }  
     }
     
     
