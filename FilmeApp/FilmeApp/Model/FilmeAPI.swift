@@ -19,7 +19,7 @@ class FilmeAPI: NSObject {
     
     // MARK: - Requisições
     
-    func recuperaFilmesAPI(_ index: Int, completion:@escaping(_ listaDeFilmes: Array<Filme>) -> Void) {
+    func recuperaFilmesAPI(_ index: Int, completion:@escaping(_ listaDeFilmes: Array<Filme>, _ numeroDePaginas: Int) -> Void) {
         
         let page = "&page=\(index)"
         
@@ -30,10 +30,12 @@ class FilmeAPI: NSObject {
                 let json = try JSONDecoder().decode(Welcome.self, from: responseData)
                 let resultado = json.results
                 
+                let numeroDePaginas = json.totalPages
+                
                 for filme in resultado {
                     self.salvaFilme(filme)
                 }
-                completion(self.listaDeFilmes)
+                completion(self.listaDeFilmes, numeroDePaginas)
             } catch let error {
                 print("error: \(error)")
             }
@@ -54,7 +56,9 @@ class FilmeAPI: NSObject {
         let posterPath = dicionarioFilme.posterPath
         let caminhoPoster = "https://image.tmdb.org/t/p/w500\(posterPath)"
         
-        return Filme(id, titulo, caminhoPoster)
+        let filme = Filme(id, titulo, caminhoPoster)
+        
+        return filme
     }
     
     

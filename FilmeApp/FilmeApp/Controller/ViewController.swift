@@ -8,20 +8,34 @@
 
 import UIKit
 
-class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
+class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate, UIScrollViewDelegate {
+    
+    
+    
 
     // MARK: - IBOutlets
     
     @IBOutlet weak var colecaoFilmes: UICollectionView!
     @IBOutlet weak var pesquisarFilme: UISearchBar!
-    
+    @IBOutlet weak var pageController: UIPageControl!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     // MARK: - Variáveis
     
     var listaDeFilmes: [Filme] = []
     var listaDePesquisa: [Filme] = []
     var requisicao = FilmeAPI()
+    var numeroDePaginas = 1
+    var paginaAtual = 1
     
+    
+    @IBAction func pageChange(_ sender: UIPageControl) {
+        paginaAtual += 1
+        recuperaFilmes(paginaAtual)
+
+    }
+    
+
     
     // MARK: - LifeCycle
     
@@ -30,24 +44,46 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         colecaoFilmes.delegate = self
         colecaoFilmes.dataSource = self
         pesquisarFilme.delegate = self
-        recuperaFilmes()
+        scrollView.delegate = self
+        configurePageControl()
+        recuperaFilmes(paginaAtual)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
-    func recuperaFilmes() {
-        for index in 1...3 {
-            requisicao.recuperaFilmesAPI(index) { (listaDeFilmes) in
-                self.listaDeFilmes = listaDeFilmes
-                self.listaDePesquisa = self.listaDeFilmes
+    
+    func recuperaFilmes(_ index:Int) {
+        requisicao.recuperaFilmesAPI(pageController.currentPage) { (listaDeFilmes, numeroDePaginas) in
+            self.listaDeFilmes = listaDeFilmes
+            self.numeroDePaginas = numeroDePaginas
+            self.listaDePesquisa = self.listaDeFilmes
                 DispatchQueue.main.async {
                     self.colecaoFilmes.reloadData()
                 }
-            }
-        }  
+        }
+        
     }
+    
+    
+    func configurePageControl() {
+        self.pageController.numberOfPages = numeroDePaginas
+        self.pageController.currentPage = paginaAtual
+    }
+
+    
+//    func recuperaFilmes() {
+//        for index in 1...3 {
+//            requisicao.recuperaFilmesAPI(index) { (listaDeFilmes) in
+//                self.listaDeFilmes = listaDeFilmes
+//                self.listaDePesquisa = self.listaDeFilmes
+//                DispatchQueue.main.async {
+//                    self.colecaoFilmes.reloadData()
+//                }
+//            }
+//        }
+//    }
     
     
     // MARK: - CollectionView

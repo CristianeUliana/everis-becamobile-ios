@@ -9,6 +9,7 @@
 import UIKit
 
 class DetalhesFilmesViewController: UIViewController {
+   
 
     //MARK: - IBOutlets
     
