@@ -8,13 +8,8 @@
 
 import Foundation
 
-
-
 class DetalhesAPI: NSObject {
 
-//    var listaDeFilmes: [Filme] = []
-//    var filmeDetalhado: Filme?
-    
     
     func recuperaDetalhesAPI(_ id: Int, completion:@escaping(DetailsFilms) -> Void) {
         let idString = String(id)
@@ -23,30 +18,11 @@ class DetalhesAPI: NSObject {
             guard let responseData = data else { return }
             do {
                 let json = try JSONDecoder().decode(DetailsFilms.self, from: responseData)
-                //guard let filmeDetalhado = self.salvaDetalhes(json, filmeSelecionado) else {return}
                 completion(json)
-                
             } catch let error {
                 print("error: \(error)")
             }
         }
         task.resume()
     }
-    
-    
-//    func salvaDetalhes(_ dicionarioFilme: DetailsFilms, _ filmeSelecionado: Filme) -> Filme? {
-//
-//        let tituloOriginal = dicionarioFilme.originalTitle
-//        let rating = dicionarioFilme.voteAverage
-//        let sinopse = dicionarioFilme.overview
-//        let imagem = dicionarioFilme.backdropPath
-//        let caminhoImagem = "https://image.tmdb.org/t/p/w500\(imagem)"
-//
-//        filmeSelecionado.detalhes.tituloOriginal = tituloOriginal
-//        filmeSelecionado.detalhes.rating = rating
-//        filmeSelecionado.detalhes.sinopse = sinopse
-//        filmeSelecionado.detalhes.caminhoImagem = caminhoImagem
-//        return filmeSelecionado
-//    }
-    
 }

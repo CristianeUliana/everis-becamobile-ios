@@ -16,7 +16,7 @@ class FilmeCollectionViewCell: UICollectionViewCell {
     
     
     func configuraCelula(filme:FilmesViewModel) {
-        guard let urlCelula = URL(string: filme.posterPath!) else { return }
+        guard let urlCelula = URL(string: filme.posterPath) else { return }
         celulaFilme.af_setImage(withURL: urlCelula)
         layer.borderWidth = 0.5
         layer.borderColor = UIColor(red: 85.0/255.0, green: 85.0/255.0, blue: 85.0/255.0, alpha: 1).cgColor

@@ -10,20 +10,15 @@ import Foundation
 
 struct FilmesViewModel: Codable {
   
-    let id: Int?
-    let posterPath: String?
-    let title: String?
+    let id: Int
+    let posterPath: String
+    let title: String
     
-    
-    
-
-    
-//
-//    init(resultado: Result) {
-//        self.title = resultado.title
-//        self.id = resultado.id
-//        self.posterPath = resultado.posterPath
-//    }
+    init(_ id: Int, _ posterPath: String, _ title: String) {
+        self.title = title
+        self.id = id
+        self.posterPath = posterPath
+    }
 }
 
 

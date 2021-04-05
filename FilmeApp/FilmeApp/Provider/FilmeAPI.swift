@@ -11,11 +11,7 @@ import Alamofire
 
 class FilmeAPI: NSObject {
     
-    // MARK: - Variáveis
 
-//    var listaDeFilmes: [Filme] = []
-//    var filmeDetalhado: Filme?
-//
     // MARK: - Requisições
     
     func recuperaFilmesAPI(completion:@escaping([Result]) -> Void) {
@@ -23,13 +19,8 @@ class FilmeAPI: NSObject {
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let responseData = data else { return }
             do {
-                let json = try JSONDecoder().decode(Welcome.self, from: responseData)
+                let json = try JSONDecoder().decode(Filmes.self, from: responseData)
                 let resultado = json.results
-
-                
-//                for filme in resultado {
-//                    self.salvaFilme(filme)
-//               }
                 completion(resultado)
             } catch let error {
                 print("error: \(error)")
@@ -37,25 +28,4 @@ class FilmeAPI: NSObject {
         }
         task.resume()
     }
-    
-    
-  
-    
-    // MARK: - Métodos
-    
-  
-    
-//    func salvaFilme(_ dicionarioFilme: Result) {
-//        guard let filme = retornaFilme(dicionarioFilme) else {return}
-//        listaDeFilmes.append(filme)
-//    }
-//
-//    func retornaFilme(_ dicionarioFilme: Result) -> Filme? {
-//        let titulo = dicionarioFilme.title
-//        let id = dicionarioFilme.id
-//        let posterPath = dicionarioFilme.posterPath
-//        let caminhoPoster = "https://image.tmdb.org/t/p/w500\(posterPath)"
-//
-//        return Filme(id, titulo, caminhoPoster)
-//    }
 }

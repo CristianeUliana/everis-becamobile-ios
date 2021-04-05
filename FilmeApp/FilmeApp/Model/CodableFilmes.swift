@@ -8,33 +8,26 @@
 
 import Foundation
 
-struct Welcome: Codable {
+struct Filmes: Codable {
   
     let results: [Result]
     
-    
     enum CodingKeys: String, CodingKey {
         case results
-
     }
 }
 
 struct Result: Codable {
    
     let id: Int
-   
     let posterPath: String
     let title: String
     
     
     enum CodingKeys: String, CodingKey {
-      
         case id
-      
         case posterPath = "poster_path"
-      
         case title
-  
     }
 }
 

@@ -23,16 +23,11 @@ class DetalhesFilmesViewController: UIViewController {
     //MARK: - Variáveis
     
     var requisicao = DetalhesAPI()
- //   var filmeDetalhado: DetalhesViewModel? = nil
-//    var filmeSelecionado: Filme? = nil
-//    var filmeDetalhado: Filme? = nil
-    
-    var idFilme: Int? 
-    
+    var idFilme: Int?
     var filmeSelecionado: FilmesViewModel? = nil
     
-    //MARK: - LifeCycle
     
+    //MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,24 +38,27 @@ class DetalhesFilmesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         guard let idFilme = idFilme else {return}
         requisicao.recuperaDetalhesAPI(idFilme) { (detalhesFilme) in
-            let backdropPath = detalhesFilme.backdropPath
-            let id = detalhesFilme.id
-            let originalTitle = detalhesFilme.originalTitle
-            let overview = detalhesFilme.overview
-            let voteAverage = detalhesFilme.voteAverage
-            let title = detalhesFilme.title
-            let caminhoPoster = "https://image.tmdb.org/t/p/w500\(backdropPath)"
-            
-//            self.filmeDetalhado = DetalhesViewModel(backdropPath: caminhoPoster, id: id, title: title, originalTitle: originalTitle, overview: overview, voteAverage: voteAverage)
-            
-            DispatchQueue.main.async {
-                self.configuraPagina(DetalhesViewModel(backdropPath: caminhoPoster, id: id, title: title, originalTitle: originalTitle, overview: overview, voteAverage: voteAverage))
+            self.setupUI(filmeCodable: detalhesFilme)
             }
-            
-            
+        }
+    
+  
+
+
+
+    func setupUI(filmeCodable: DetailsFilms){
+        
+        let filmeDetalhado = DetalhesViewModel(filmeCodable.title, filmeCodable.originalTitle, "https://image.tmdb.org/t/p/w500\(filmeCodable.backdropPath)", filmeCodable.overview, filmeCodable.voteAverage)
+        
+//        let filmeDetalhado = DetalhesViewModel("Godzilla vs. Kong", "Godzilla vs. Kong", "https://image.tmdb.org/t/p/w500/jMWkd0fuwbG39eJpzycJzPWMCww.jpg", "In a time when monsters walk the Earth, humanity’s fight for its future sets Godzilla and Kong on a collision course that will see the two most powerful forces of nature on the planet collide in a spectacular battle for the ages.", 8.5)
+        
+        
+        DispatchQueue.main.async {
+            self.configuraPagina(filmeDetalhado)
         }
     }
-  
+    
+
     
     func configuraPagina(_ filmeDetalhado: DetalhesViewModel) {
         guard let urlCelula = URL(string: filmeDetalhado.backdropPath) else { return }

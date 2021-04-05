@@ -10,23 +10,19 @@ import Foundation
 
 
 struct DetalhesViewModel {
-    let backdropPath: String
-    let id: Int
     let title: String
     let originalTitle: String
+    let backdropPath: String
     let overview: String
     let voteAverage: Double
-    
-    
-    
-    
-//    init(detalhes: DetailsFilms) {
-//        self.backdropPath = detalhes.backdropPath
-//        self.id = detalhes.id
-//        self.originalTitle = detalhes.originalTitle
-//        self.overview = detalhes.overview
-//        self.voteAverage = detalhes.voteAverage
-//    }
+   
+    init(_ title: String, _ originalTitle: String, _ backdropPath: String, _ overview: String, _ voteAverage: Double) {
+        self.title = title
+        self.originalTitle = originalTitle
+        self.backdropPath = backdropPath
+        self.overview = overview
+        self.voteAverage = voteAverage
+    }
 }
 
 

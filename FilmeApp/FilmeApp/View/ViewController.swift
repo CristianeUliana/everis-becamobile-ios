@@ -19,10 +19,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     // MARK: - Variáveis
     
-    //var listaDeFilmes: [Filme] = []
-    //var listaDePesquisa: [Filme] = []
     var requisicao = FilmeAPI()
-    
     var listaFilmes = [FilmesViewModel]()
     var listaPesquisa = [FilmesViewModel]()
     
@@ -43,24 +40,26 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     func recuperaFilmes() {
         requisicao.recuperaFilmesAPI() { (resultados) in
-            
-            for resultado in resultados {
-                
-                let titulo = resultado.title
-                let id = resultado.id
-                let posterPath = resultado.posterPath
-                let caminhoPoster = "https://image.tmdb.org/t/p/w500\(posterPath)"
-                
-                self.listaFilmes.append(FilmesViewModel(id: id, posterPath: caminhoPoster, title: titulo))
-            }
-            self.listaPesquisa = self.listaFilmes
-            //self.listaDePesquisa = self.listaDeFilmes
-            DispatchQueue.main.async {
-                self.colecaoFilmes.reloadData()
-            }
+            self.setupUI(filmesCodable: resultados)
             
         }
     }
+    
+  
+    
+    func setupUI(filmesCodable: [Result]){
+        
+        for filme in filmesCodable {
+            
+            let filmeDetalhado = FilmesViewModel(filme.id, "https://image.tmdb.org/t/p/w500\(filme.posterPath)", filme.title)
+            listaFilmes.append(filmeDetalhado)
+            listaPesquisa = listaFilmes
+            DispatchQueue.main.async {
+                self.colecaoFilmes.reloadData()
+            }
+        }
+    }
+    
     
     
     // MARK: - CollectionView
@@ -92,24 +91,17 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     //MARK: - SearchBar
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        listaPesquisa = listaFilmes
-        if searchText != "" {
-            let filtro = NSPredicate(format: "titulo contains [cd] %@", searchText)
-            let listaFiltrada:Array<FilmesViewModel> = (listaPesquisa as NSArray).filtered(using: filtro) as! Array
-            listaPesquisa = listaFiltrada
-        }
-        colecaoFilmes.reloadData()
-    }
-    
 //    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        listaDePesquisa = listaDeFilmes
+//        listaPesquisa = listaFilmes
+//       
 //        if searchText != "" {
-//            let filtro = NSPredicate(format: "titulo contains [cd] %@", searchText)
-//            let listaFiltrada:Array<Filme> = (listaDePesquisa as NSArray).filtered(using: filtro) as! Array
-//            listaDePesquisa = listaFiltrada
+//            let filtro = NSPredicate(format: "title contains [cd] %@", searchText)
+//            let listaFiltrada:Array<FilmesViewModel> = (listaPesquisa as NSArray).filtered(using: filtro) as! Array
+//            listaPesquisa = listaFiltrada
 //        }
-//      colecaoFilmes.reloadData()
+//        colecaoFilmes.reloadData()
 //    }
+    
+  
 }
 
