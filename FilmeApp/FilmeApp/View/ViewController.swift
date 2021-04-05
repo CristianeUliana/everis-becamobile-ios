@@ -19,9 +19,12 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     // MARK: - Variáveis
     
-    var listaDeFilmes: [Filme] = []
-    var listaDePesquisa: [Filme] = []
+    //var listaDeFilmes: [Filme] = []
+    //var listaDePesquisa: [Filme] = []
     var requisicao = FilmeAPI()
+    
+    var listaFilmes = [FilmesViewModel]()
+    var listaPesquisa = [FilmesViewModel]()
     
     
     // MARK: - LifeCycle
@@ -39,10 +42,23 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
     
     func recuperaFilmes() {
-        requisicao.recuperaFilmesAPI() { (listaDeFilmes) in
-            self.listaDeFilmes = listaDeFilmes
-            self.listaDePesquisa = self.listaDeFilmes
-            self.colecaoFilmes.reloadData()
+        requisicao.recuperaFilmesAPI() { (resultados) in
+            
+            for resultado in resultados {
+                
+                let titulo = resultado.title
+                let id = resultado.id
+                let posterPath = resultado.posterPath
+                let caminhoPoster = "https://image.tmdb.org/t/p/w500\(posterPath)"
+                
+                self.listaFilmes.append(FilmesViewModel(id: id, posterPath: caminhoPoster, title: titulo))
+            }
+            self.listaPesquisa = self.listaFilmes
+            //self.listaDePesquisa = self.listaDeFilmes
+            DispatchQueue.main.async {
+                self.colecaoFilmes.reloadData()
+            }
+            
         }
     }
     
@@ -51,12 +67,12 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.listaDePesquisa.count
+        return self.listaPesquisa.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let celulaFilme = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! FilmeCollectionViewCell
-        let filmeAtual = listaDePesquisa[indexPath.item]
+        let filmeAtual = listaPesquisa[indexPath.item]
         celulaFilme.configuraCelula(filme: filmeAtual)
         return celulaFilme
     }
@@ -66,10 +82,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detalhesFilme = listaDePesquisa[indexPath.item]
+        let detalhesFilme = listaPesquisa[indexPath.item]
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "detalhes") as! DetalhesFilmesViewController
-        controller.filmeSelecionado = detalhesFilme
+        controller.idFilme = detalhesFilme.id
         self.navigationController?.pushViewController(controller, animated: true)
     }
     
@@ -77,13 +93,23 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     //MARK: - SearchBar
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        listaDePesquisa = listaDeFilmes
+        listaPesquisa = listaFilmes
         if searchText != "" {
             let filtro = NSPredicate(format: "titulo contains [cd] %@", searchText)
-            let listaFiltrada:Array<Filme> = (listaDePesquisa as NSArray).filtered(using: filtro) as! Array
-            listaDePesquisa = listaFiltrada
+            let listaFiltrada:Array<FilmesViewModel> = (listaPesquisa as NSArray).filtered(using: filtro) as! Array
+            listaPesquisa = listaFiltrada
         }
-      colecaoFilmes.reloadData()
+        colecaoFilmes.reloadData()
     }
+    
+//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        listaDePesquisa = listaDeFilmes
+//        if searchText != "" {
+//            let filtro = NSPredicate(format: "titulo contains [cd] %@", searchText)
+//            let listaFiltrada:Array<Filme> = (listaDePesquisa as NSArray).filtered(using: filtro) as! Array
+//            listaDePesquisa = listaFiltrada
+//        }
+//      colecaoFilmes.reloadData()
+//    }
 }
 
