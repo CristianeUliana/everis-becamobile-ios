@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
+class ViewController: UIViewController {
 
     // MARK: - IBOutlets
     
@@ -76,9 +76,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         return celulaFilme
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return UIDevice.current.userInterfaceIdiom == .phone ? CGSize(width: collectionView.bounds.width/2-10, height: 210) : CGSize(width: collectionView.bounds.width/3-20, height: 300)
-    }
+   
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detalhesFilme = listaPesquisa[indexPath.item]
@@ -89,19 +87,41 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
     
     
-    //MARK: - SearchBar
-    
-//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        listaPesquisa = listaFilmes
-//       
-//        if searchText != "" {
-//            let filtro = NSPredicate(format: "title contains [cd] %@", searchText)
-//            let listaFiltrada:Array<FilmesViewModel> = (listaPesquisa as NSArray).filtered(using: filtro) as! Array
-//            listaPesquisa = listaFiltrada
-//        }
-//        colecaoFilmes.reloadData()
-//    }
+
     
   
 }
 
+
+extension ViewController: UICollectionViewDataSource {
+
+}
+
+extension ViewController: UICollectionViewDelegate {
+
+}
+
+extension ViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return UIDevice.current.userInterfaceIdiom == .phone ? CGSize(width: collectionView.bounds.width/2-10, height: 210) : CGSize(width: collectionView.bounds.width/3-20, height: 300)
+    }
+    
+}
+
+extension ViewController: UISearchBarDelegate {
+    
+    //MARK: - SearchBar
+    
+    //    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    //        listaPesquisa = listaFilmes
+    //
+    //        if searchText != "" {
+    //            let filtro = NSPredicate(format: "title contains [cd] %@", searchText)
+    //            let listaFiltrada:Array<FilmesViewModel> = (listaPesquisa as NSArray).filtered(using: filtro) as! Array
+    //            listaPesquisa = listaFiltrada
+    //        }
+    //        colecaoFilmes.reloadData()
+    //    }
+    
+}
