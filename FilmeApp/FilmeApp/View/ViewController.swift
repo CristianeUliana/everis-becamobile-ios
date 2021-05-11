@@ -111,17 +111,17 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
 
 extension ViewController: UISearchBarDelegate {
     
-    //MARK: - SearchBar
+    // MARK: - SearchBar
     
-    //    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-    //        listaPesquisa = listaFilmes
-    //
-    //        if searchText != "" {
-    //            let filtro = NSPredicate(format: "title contains [cd] %@", searchText)
-    //            let listaFiltrada:Array<FilmesViewModel> = (listaPesquisa as NSArray).filtered(using: filtro) as! Array
-    //            listaPesquisa = listaFiltrada
-    //        }
-    //        colecaoFilmes.reloadData()
-    //    }
+        func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+            listaPesquisa = listaFilmes
+    
+            if searchText != "" {
+                let textoPesquisado = searchText
+                let listaFiltrada = listaPesquisa.filter { $0.title.range(of: textoPesquisado, options: [.caseInsensitive]) != nil }
+                listaPesquisa = listaFiltrada
+            }
+            colecaoFilmes.reloadData()
+        }
     
 }
